@@ -5,9 +5,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/tilt-dev/workshop/wslocal/apihelpers"
-	"github.com/tilt-dev/workshop/wslocal/first"
-	"github.com/tilt-dev/workshop/wslocal/state"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/apihelpers"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/first"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/state"
 )
 
 type Machine interface {

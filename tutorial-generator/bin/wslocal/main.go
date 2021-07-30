@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/tilt-dev/workshop/wslocal"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal"
 )
 
 func main() {

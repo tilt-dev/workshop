@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/tilt-dev/workshop/wslocal/apihelpers"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/apihelpers"
 )
 
 type State struct {

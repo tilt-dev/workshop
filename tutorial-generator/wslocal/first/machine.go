@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/tilt-dev/workshop/wslocal/apihelpers"
-	"github.com/tilt-dev/workshop/wslocal/state"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/apihelpers"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/state"
 )
 
 type Machine struct {

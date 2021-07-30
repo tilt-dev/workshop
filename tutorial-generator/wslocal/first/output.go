@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/tilt-dev/workshop/wslocal/state"
+	"github.com/tilt-dev/workshop/tutorial-generator/wslocal/state"
 )
 
 func (m *Machine) PrintState(ctx context.Context, st state.State) error {
@@ -15,7 +15,7 @@ func (m *Machine) PrintState(ctx context.Context, st state.State) error {
 
 	fmt.Printf("%v\n\n", st.Description)
 
-	fmt.Printf("To progress to step %d of %d:\n", st.StepNum + 1, st.TotalSteps)
+	fmt.Printf("To progress to step %d of %d:\n", st.StepNum+1, st.TotalSteps)
 	for _, substep := range st.Substeps {
 		if err := m.PrintSubstep(ctx, substep); err != nil {
 			return err
