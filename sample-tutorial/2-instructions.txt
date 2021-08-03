@@ -1,0 +1,7 @@
+Fix Error
+
+Tilt shows you where errors are.
+
+This workshop introduced an error in one of your services.
+
+Use Tilt's UI to find the problem and fix it.
