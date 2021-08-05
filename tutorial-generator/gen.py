@@ -41,14 +41,14 @@ def generate(input_dir: pathlib.Path):
     i = 1
     for step in steps:
         step_num = _step_num(step)
-        script = 'set -x\n\n'
+        # script = 'set -x\n\n'
         script = ''
 
         script += f'printf {shlex.quote(_divider())}\n\n'
 
         prepare_script_path = step.parent.joinpath(f'{step_num}-prepare.sh')
         if prepare_script_path.exists():
-            extra_scripts[prepare_script_path.name] = 'set -x\n\n'
+            # extra_scripts[prepare_script_path.name] = 'set -x\n\n'
             extra_scripts[prepare_script_path.name] = prepare_script_path.read_text(encoding='utf-8')
             script += f'/usr/bin/env bash "$TILT_WORKSHOP_TMPDIR/{prepare_script_path.name}" >/dev/null\n\n'
 
@@ -59,7 +59,7 @@ def generate(input_dir: pathlib.Path):
 
         check_script_path = step.parent.joinpath(f'{step_num}-check.sh')
         if check_script_path.exists():
-            extra_scripts[check_script_path.name] = 'set-x\n\n'
+            # extra_scripts[check_script_path.name] = 'set-x\n\n'
             extra_scripts[check_script_path.name] = check_script_path.read_text(encoding='utf-8')
             script += f'/usr/bin/env bash "$TILT_WORKSHOP_TMPDIR/{check_script_path.name}"\n\n'
 
@@ -91,6 +91,7 @@ def extra_scripts():
     #     )
     # '''.format(resource_name, cmds, []))
 
+    tiltfile.write('\n\n')
     tiltfile.write(pathlib.Path(__file__).parent.joinpath('base.tiltfile').read_text(encoding='utf-8'))
     tiltfile.close()
 

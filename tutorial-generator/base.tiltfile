@@ -1,5 +1,4 @@
 load('ext://workflow', 'workflow')
-# $$GLOBAL_VARS$$
 
 
 def make_tmpdir():
@@ -20,10 +19,11 @@ def _write_scripts(out_dir, scripts):
         local(
             'echo "$TILT_WORKSHOP_SCRIPT" > {}'.format(p),
             env={'TILT_WORKSHOP_SCRIPT': scripts[name]},
-            quiet=False,
-            echo_off=False)
+            quiet=True,
+            echo_off=True)
         out_paths.append(p)
     return out_paths
+
 
 def workshop():
     tmpdir = make_tmpdir()

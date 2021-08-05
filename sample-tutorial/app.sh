@@ -1,1 +1,1 @@
-python3 -m hzzp.server 8765
+python3 -m http.server 8765

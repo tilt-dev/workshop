@@ -1,4 +1,6 @@
 
+os.putenv('WORKSHOP', '1')
+
 load_dynamic('workshop.tiltfile')
 
 local_resource('dummy',
@@ -10,4 +12,6 @@ local_resource('dummy',
                    http_get=http_get_action(port=8765, path="/ready.txt")
                ))
 
-# trigger_mode(TRIGGER_MODE_MANUAL)
+local_resource('tutorial-generator',
+               cmd='python3 ./tutorial-generator/gen.py ./sample-tutorial',
+               deps=['./sample-tutorial'])
