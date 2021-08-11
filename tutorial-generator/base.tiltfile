@@ -1,0 +1,45 @@
+load('ext://workflow', 'workflow')
+
+
+def make_tmpdir():
+    # TODO(milas): use ConfigMap in Tilt to store this so that we can clean up on `tilt down`
+    tmpdir = os.getenv('TILT_WORKSHOP_TMPDIR')
+    if not tmpdir:
+        tmpdir = str(local('mktemp -d', quiet=False, echo_off=False)).strip()
+        os.putenv('TILT_WORKSHOP_TMPDIR', tmpdir)
+    print("tmpdir:", tmpdir)
+    return tmpdir
+
+
+def _write_scripts(out_dir, scripts):
+    out_paths = []
+    print(scripts)
+    for name in scripts:
+        p = os.path.join(out_dir, name)
+        local(
+            'echo "$TILT_WORKSHOP_SCRIPT" > {}'.format(p),
+            env={'TILT_WORKSHOP_SCRIPT': scripts[name]},
+            quiet=True,
+            echo_off=True)
+        out_paths.append(p)
+    return out_paths
+
+
+def workshop():
+    tmpdir = make_tmpdir()
+    local_resource('workshop', cmd=['/usr/bin/env', 'bash', os.path.join(tmpdir, 'welcome.sh')])
+
+    _write_scripts(tmpdir, extra_scripts())
+
+    step_cmds = []
+    for p in _write_scripts(tmpdir, step_scripts()):
+        step_cmds.append(['/usr/bin/env', 'bash', shlex.quote(p)])
+
+    workflow(
+        'Tutorial',
+        resource_name='workshop',
+        work_cmds=step_cmds
+    )
+
+if os.getenv('WORKSHOP'):
+    workshop()

@@ -1,0 +1,7 @@
+Update Code
+
+Tilt handles updating the running servers for you.
+
+Let's make a small change to one of the services to see this working.
+
+In the file muxer/main.go, change "Tilt Team" to "workshop".
