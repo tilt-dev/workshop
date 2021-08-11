@@ -1,5 +1,11 @@
-echo "Preparing the next step...hang tight!"
+sed -i '' -e 's/http/hzzp/' ./sample-app.sh
 
-sed -i '' -e 's/http/hzzp/' ./sample-tutorial/app.sh
+# wait for the resource to be in the 'error' state before moving on...
 
-/usr/bin/env bash "${TILT_WORKSHOP_TMPDIR}/api-check.sh" "uiresource" "dummy" ".status.runtimeStatus" "error" >/dev/null
+NAME="my-app"
+KIND="uiresource"
+# change to .status.updateStatus for build/update
+API_PATH=".status.runtimeStatus"
+VALUE="error"
+
+/usr/bin/env bash "${TILT_WORKSHOP_TMPDIR}/api-check.sh" "${KIND}" "${NAME}" "${API_PATH}" "${VALUE}" >/dev/null

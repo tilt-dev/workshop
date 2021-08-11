@@ -1,3 +1,9 @@
-Buttons
+\033[32mButtons\033[0m
 
-A button was just added
+Tilt supports per-resource buttons that can execute a local command for common tasks.
+For example, a button could run a lint/format tool or reset a development DB to a clean state.
+
+A button was just added to the 'my-app' resource with the text 'Click me!'.
+
+Find it and click it, then return here.
+(Don't worry - it won't actually run any code when clicked!)

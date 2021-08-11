@@ -1,7 +1,8 @@
-Update Code
+\033[32mUpdate Code\033[0m
 
 Tilt handles updating the running servers for you.
+Live update does in-place updates of containers without requiring an image build.
 
 Let's make a small change to one of the services to see this working.
 
-In the file muxer/main.go, change "Tilt Team" to "workshop".
+In the file `sample-app.sh`, change "Hello Tilt" to "Hello World".
