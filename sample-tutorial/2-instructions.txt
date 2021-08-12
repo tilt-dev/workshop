@@ -1,7 +1,7 @@
-Fix Error
+\033[32mFix Error\033[0m
 
-Tilt shows you where errors are.
+Tilt shows you any errors during build/update and deploy across your services.
 
 This workshop introduced an error in one of your services.
 
-Use Tilt's UI to find the problem and fix it.
+Use Tilt's UI to find the failed service and fix it.

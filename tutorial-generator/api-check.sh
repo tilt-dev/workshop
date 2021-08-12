@@ -18,7 +18,7 @@ lastValue=""
 while IFS= read -r -d~ value;
 do
   if [[ ${EXPECTED} == "after_now" ]]; then
-    if [[ ${value} > "${now}" ]]; then
+    if [[ ${value} != "<nil>" ]] && [[ ${value} > "${now}" ]]; then
       break
     fi
   else

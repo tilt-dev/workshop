@@ -15,10 +15,31 @@ It's meta and awesome.
 
 This repo includes a tool to assemble your own interactive Tilt tutorial.
 
-You can run `tilt up` on this repo to try it out.
+You will need Python 3.6+ (included by default on recent macOS versions and most Linux distributions).
+
+To try out the sample tutorial, you can run `tilt up` on this repo.
 It will automatically be rebuilt whenever you change an input file in `sample-tutorial/`.
 
-Once you're happy with it, copy `workshop.tiltfile` into your project and add the following to your main `Tiltfile`:
+You can also work in your actual project repo, which makes testing out custom logic much easier.
+Add the following to your `Tiltfile`:
+```python
+if os.getenv('WORKSHOP_DEV'):
+    load('ext://git_resource', 'git_checkout')
+    git_checkout('https://github.com/tilt-dev/workshop.git#main')
+    local('if [ ! -d ./tilt-tutorial ]; then cp -R ./.git-sources/workshop/sample-tutorial ./tilt-tutorial; fi')
+    local_resource('tutorial-generator',
+                   cmd='python3 ./.git-sources/workshop/tutorial-generator/gen.py ./tilt-tutorial',
+                   deps=['./tilt-tutorial', './.git-sources/workshop'])
+    os.putenv('WORKSHOP', '1')
+    load_dynamic('workshop.tiltfile')
+```
+Launch Tilt with `WORKSHOP_DEV=1 tilt up` and it will create a `tilt-tutorial` directory with a copy of the sample tutorial input.
+Additionally, new `workshop` and `tutorial-generator` resources will appear.
+The workshop will automatically be rebuilt whenever you change an input file in `tilt-tutorial/`.
+
+:information_source: Add `.git-sources` (and optionally `tilt-tutorial` for the input files) to your `.gitignore`.
+
+Once you're happy with it, commit `workshop.tiltfile` to your project's repo and add the following to your main `Tiltfile`:
 ```python
 load_dynamic('workshop.tiltfile')
 ```
@@ -30,10 +51,10 @@ To run the workshop, you'll need Bash: it should work out of the box on macOS/Li
 Windows users can use WSL2 (Windows Subsystem for Linux) or a VM.
 
 The workshop is inactive by default so that it does not interfere with day-to-day Tilt usage.
-Launch Tilt with `WORKSHOP=1 tilt up` to activate.
+Attendees should launch Tilt with `WORKSHOP=1 tilt up` to activate.
 
 ## Duplicating this Repo
-We recommend creating a copy of this repo so that you can version your custom tutorial.
+If you choose to create a copy of this repo so that you can version your custom tutorial, please take care in how you copy it.
 
 :warning: If you **fork** this repo, it will be public!
 

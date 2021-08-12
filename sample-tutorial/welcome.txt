@@ -1,10 +1,10 @@
 
 
-Welcome to the Tilt Workshop!
+\033[32mWelcome to the Tilt Workshop!\033[0m
 
 We'll walk you through starting up your services and understanding some basics.
 
 
-To get started, click "Tutorial: next step".
+To get started, click "Tutorial: Next Step".
 
-You can always return to the beginning with "Tutorial: rewind".
+You can always return to the beginning with "Tutorial: Reset".

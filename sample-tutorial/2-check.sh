@@ -1,4 +1,4 @@
-NAME="dummy"
+NAME="my-app"
 KIND="uiresource"
 # change to .status.updateStatus for build/update
 API_PATH=".status.runtimeStatus"
