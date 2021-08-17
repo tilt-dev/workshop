@@ -24,14 +24,16 @@ You can also work in your actual project repo, which makes testing out custom lo
 Add the following to your `Tiltfile`:
 ```python
 if os.getenv('WORKSHOP_DEV'):
-    load('ext://git_resource', 'git_checkout')
-    git_checkout('https://github.com/tilt-dev/workshop.git#main')
+    git_ext = load_dynamic('ext://git_resource')
+    git_ext['git_checkout']('https://github.com/tilt-dev/workshop.git#main')
     local('if [ ! -d ./tilt-tutorial ]; then cp -R ./.git-sources/workshop/sample-tutorial ./tilt-tutorial; fi')
     local_resource('tutorial-generator',
                    cmd='python3 ./.git-sources/workshop/tutorial-generator/gen.py ./tilt-tutorial',
                    deps=['./tilt-tutorial', './.git-sources/workshop'])
     os.putenv('WORKSHOP', '1')
-    load_dynamic('workshop.tiltfile')
+    watch_file('workshop.tiltfile')
+    if os.path.exists('workshop.tiltfile'):
+       load_dynamic('workshop.tiltfile')
 ```
 Launch Tilt with `WORKSHOP_DEV=1 tilt up` and it will create a `tilt-tutorial` directory with a copy of the sample tutorial input.
 Additionally, new `workshop` and `tutorial-generator` resources will appear.
